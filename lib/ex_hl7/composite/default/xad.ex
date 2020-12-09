@@ -53,9 +53,10 @@ defmodule HL7.Composite.Default.XAD do
   use HL7.Composite.Spec
 
   require HL7.Composite.Default.DR, as: DR
+  require HL7.Composite.Default.SAD, as: SAD
 
   composite do
-    component :street_address,         type: :string
+    component :street_address,         type: SAD
     component :other_designation,      type: :string
     component :city,                   type: :string
     component :state,                  type: :string

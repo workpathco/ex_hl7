@@ -8,23 +8,25 @@ defmodule HL7.Segment.Default.PID do
   require HL7.Composite.Default.XPN, as: XPN
 
   segment "PID" do
-    field :set_id,                                          seq: 1,   type: :integer, len: 4
-    field :patient_id_external,                             seq: 2,   type: {CX, :id}, len: 20
-    field :assigning_authority_id_external,                 seq: 2,   rep: 1, type: {CX, :assigning_authority, :namespace_id}, len: 6
-    field :assigning_authority_universal_id_external,       seq: 2,   rep: 1, type: {CX, :assigning_authority, :universal_id}, len: 6
-    field :assigning_authority_universal_id_type_external,  seq: 2,   rep: 1, type: {CX, :assigning_authority, :universal_id_type}, len: 10
-    field :patient_id,                                      seq: 3,   rep: 1, type: {CX, :id}, len: 20
-    field :assigning_authority_id,                          seq: 3,   rep: 1, type: {CX, :assigning_authority, :namespace_id}, len: 6
-    field :assigning_authority_universal_id,                seq: 3,   rep: 1, type: {CX, :assigning_authority, :universal_id}, len: 6
-    field :assigning_authority_universal_id_type,           seq: 3,   rep: 1, type: {CX, :assigning_authority, :universal_id_type}, len: 10
-    field :id_type,                                         seq: 3,   rep: 1, type: {CX, :id_type}, len: 2
-    field :patient_document_id,                             seq: 3,   rep: 2, type: {CX, :id}, len: 20
-    field :patient_document_id_type,                        seq: 3,   rep: 2, type: {CX, :id_type}, len: 2
-    field :last_name,                                       seq: 5,   type: {XPN, :family_name, :surname}, len: 25
-    field :first_name,                                      seq: 5,   type: {XPN, :given_name}, len: 25
-    field :date_of_birth,                                   seq: 7,   type: :datetime, len: 14
-    field :administrative_sex,                              seq: 8,   type: :string, len: 1
-    field :street,                                          seq: 11,  type: {XAD, :street_address}, len: 20
+    field :set_id,                                          seq:  1,  type: :integer, len: 4
+    field :patient_id_external,                             seq:  2,  type: {CX, :id}, len: 20
+    field :assigning_authority_id_external,                 seq:  2,  rep: 1, type: {CX, :assigning_authority, :namespace_id}, len: 6
+    field :assigning_authority_universal_id_external,       seq:  2,  rep: 1, type: {CX, :assigning_authority, :universal_id}, len: 6
+    field :assigning_authority_universal_id_type_external,  seq:  2,  rep: 1, type: {CX, :assigning_authority, :universal_id_type}, len: 10
+    field :patient_id,                                      seq:  3,  rep: 1, type: {CX, :id}, len: 20
+    field :assigning_authority_id,                          seq:  3,  rep: 1, type: {CX, :assigning_authority, :namespace_id}, len: 6
+    field :assigning_authority_universal_id,                seq:  3,  rep: 1, type: {CX, :assigning_authority, :universal_id}, len: 6
+    field :assigning_authority_universal_id_type,           seq:  3,  rep: 1, type: {CX, :assigning_authority, :universal_id_type}, len: 10
+    field :id_type,                                         seq:  3,  rep: 1, type: {CX, :id_type}, len: 2
+    field :patient_document_id,                             seq:  3,  rep: 2, type: {CX, :id}, len: 20
+    field :patient_document_id_type,                        seq:  3,  rep: 2, type: {CX, :id_type}, len: 2
+    field :last_name,                                       seq:  5,  type: {XPN, :family_name, :surname}, len: 25
+    field :first_name,                                      seq:  5,  type: {XPN, :given_name}, len: 25
+    field :date_of_birth,                                   seq:  7,  type: :datetime, len: 14
+    field :administrative_sex,                              seq:  8,  type: :string, len: 1
+    field :street,                                          seq: 11,  type: {XAD, :street_address, :street_or_mailing_address}, len: 20
+    field :street_name,                                     seq: 11,  type: {XAD, :street_address, :street_name}, len: 20
+    field :dwelling_number,                                 seq: 11,  type: {XAD, :street_address, :dwelling_number}, len: 20
     field :other_designation,                               seq: 11,  type: {XAD, :other_designation}, len: 20
     field :city,                                            seq: 11,  type: {XAD, :city}, len: 30
     field :state,                                           seq: 11,  type: {XAD, :state}, len: 1
