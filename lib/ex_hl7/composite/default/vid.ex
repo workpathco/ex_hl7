@@ -3,9 +3,9 @@ defmodule HL7.Composite.Default.VID do
   16.2.75 Version Identifier (VID)
 
   Components:
-    - `Version ID` (ST)
-    - `Internationalization Code` (CE)
-    - `Internationalization Version ID` (CE)
+    - `version_id` (ST)
+    - `internationalization_code` (CE)
+    - `internationalization_version_id` (CE)
   """
   use HL7.Composite.Spec
 

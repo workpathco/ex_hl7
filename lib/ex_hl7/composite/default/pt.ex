@@ -3,8 +3,8 @@ defmodule HL7.Composite.Default.PT do
   16.2.53 Processing Type (PT)
 
   Components:
-    - `Processing ID` (ST)
-    - `Processing Mode` (ST)
+    - `processing_id` (ST)
+    - `processing_mode` (ST)
   """
   use HL7.Composite.Spec
 
