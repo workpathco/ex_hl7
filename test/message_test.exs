@@ -310,8 +310,8 @@ defmodule HL7.Test.MessageTest do
   end
 
   test "delete/insert/replace segments into a message" do
-    alias HL7.Segment.OBX
-    alias HL7.Segment.NTE
+    alias HL7.Segment.Default.OBX
+    alias HL7.Segment.Default.NTE
     buf =
       "MSH|^~\\&|SERVHL7|^112233^IIN|CLIENTHL7|CLI01020304|20120201094257||ZPA^Z02^ZPA_Z02|7745168|P|2.4|||AL|NE|ARG\r" <>
       "MSA|AA|00XX20120201101155\r" <>
