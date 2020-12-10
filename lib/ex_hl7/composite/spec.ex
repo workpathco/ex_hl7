@@ -157,6 +157,7 @@ defmodule HL7.Composite.Spec do
   """
   def base_type(composite_type) when is_tuple(composite_type) do
     composite_mod = elem(composite_type, 0)
+    composite_fields = Tuple.delete_at(composite_type, 0)
 
     if composite_module?(composite_mod) do
       key = elem(composite_type, 1)
@@ -165,8 +166,12 @@ defmodule HL7.Composite.Spec do
         {^key, type} when tuple_size(composite_type) === 2 ->
           type
 
-        {^key, subcomposite_mod} when tuple_size(composite_type) === 3 ->
-          base_type({subcomposite_mod, elem(composite_type, 2)})
+        {^key, subcomposite_mod} when tuple_size(composite_type) > 2 ->
+          # replace first field with the module
+          composite_fields
+          |> Tuple.delete_at(0)
+          |> Tuple.insert_at(0, subcomposite_mod)
+          |> base_type()
 
         nil ->
           nil
@@ -196,9 +201,14 @@ defmodule HL7.Composite.Spec do
     end
   end
 
-  def composite_module?(module) do
-    is_atom(module) and Code.ensure_compiled?(module) and function_exported?(module, :spec, 0)
+  def composite_module?(module) when is_atom(module) do
+    case Code.ensure_compiled(module) do
+      {:module, module} -> function_exported?(module, :spec, 0)
+      _ -> false
+    end
   end
+
+  def composite_module?(_), do: false
 
   @doc "Checks that the default value assigned to a component inside a composite field is valid"
   def check_default!(name, type, default) do
