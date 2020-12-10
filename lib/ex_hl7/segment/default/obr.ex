@@ -1,5 +1,5 @@
 defmodule HL7.Segment.Default.OBR do
-  @moduledoc "16.7.91 OBR - Observation Request Segment"
+  @moduledoc "4.5.3 OBR - Observation Request Segment"
   use HL7.Segment.Spec
 
   require HL7.Composite.Default.CE, as: CE

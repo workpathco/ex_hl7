@@ -1,6 +1,6 @@
 defmodule HL7.Composite.Default.SAD do
   @moduledoc """
-  16.2.63 SAD - street address
+  2.A.68 SAD - street address
 
   Components:
     - `steet_address` (ST)

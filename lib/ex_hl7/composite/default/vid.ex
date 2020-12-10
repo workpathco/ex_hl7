@@ -1,6 +1,6 @@
 defmodule HL7.Composite.Default.VID do
   @moduledoc """
-  16.2.75 Version Identifier (VID)
+  2.A.83 Version Identifier (VID)
 
   Components:
     - `version_id` (ST)

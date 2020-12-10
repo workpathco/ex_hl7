@@ -1,6 +1,6 @@
 defmodule HL7.Composite.Default.CWE do
   @moduledoc """
-  16.2.12 CWE - coded with exceptions
+  2.A.13 CWE - coded with exceptions
 
   Components:
 

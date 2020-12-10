@@ -1,6 +1,6 @@
 defmodule HL7.Composite.Default.PT do
   @moduledoc """
-  16.2.53 Processing Type (PT)
+  2.A.58 Processing Type (PT)
 
   Components:
     - `processing_id` (ST)

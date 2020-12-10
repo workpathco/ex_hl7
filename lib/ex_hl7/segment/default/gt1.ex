@@ -1,5 +1,5 @@
 defmodule HL7.Segment.GT1 do
-  @moduledoc "16.7.57 GT1 - Guarantor Segment"
+  @moduledoc "6.5.5 GT1 - Guarantor Segment"
   use HL7.Segment.Spec
 
   require HL7.Composite.Default.XAD, as: XAD

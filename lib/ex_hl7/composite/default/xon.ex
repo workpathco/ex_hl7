@@ -1,6 +1,6 @@
 defmodule HL7.Composite.Default.XON do
   @moduledoc """
-  16.2.81 XON - extended composite name and identification number for organizations
+  2.A.89 XON - extended composite name and identification number for organizations
 
   Components:
     - `organization_name` (ST)

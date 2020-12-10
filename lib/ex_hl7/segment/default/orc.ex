@@ -1,5 +1,5 @@
 defmodule HL7.Segment.Default.ORC do
-  @moduledoc "16.7.103 ORC - Common Order Segment"
+  @moduledoc "4.5.1 ORC - Common Order Segment"
   use HL7.Segment.Spec
 
   require HL7.Composite.Default.EI, as: EI

@@ -1,5 +1,5 @@
 defmodule HL7.Segment.Default.TQ1 do
-  @moduledoc "16.7.211 TQ1 - Timing/Quantity Segment"
+  @moduledoc "4.5.4 TQ1 - Timing/Quantity Segment"
   use HL7.Segment.Spec
 
   require HL7.Composite.Default.CWE, as: CWE
