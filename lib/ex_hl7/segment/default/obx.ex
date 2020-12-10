@@ -21,5 +21,5 @@ defmodule HL7.Segment.Default.OBX do
     # field :observation_value_alt_id,            seq:  5, type: {CE, :alt_id}, len: 14
     # field :observation_value_alt_coding_system, seq:  5, type: {CE, :alt_coding_system}, len: 8
     field :observation_status,              seq: 11, type: :string, len: 1
-
+  end
 end
