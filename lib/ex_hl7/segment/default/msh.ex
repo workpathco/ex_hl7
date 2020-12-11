@@ -3,6 +3,7 @@ defmodule HL7.Segment.Default.MSH do
   use HL7.Segment.Spec
 
   require HL7.Composite.Default.CM_MSH_9, as: CM_MSH_9
+  require HL7.Composite.Default.EI, as: EI
   require HL7.Composite.Default.HD, as: HD
   require HL7.Composite.Default.PT, as: PT
   require HL7.Composite.Default.VID, as: VID
@@ -33,5 +34,9 @@ defmodule HL7.Segment.Default.MSH do
     field :app_ack_type,                         seq: 16, type: :string, len: 2
     field :country_code,                         seq: 17, type: :string, len: 3, default: "ARG"
     field :char_set,                             seq: 18, type: :string, len: 10
+    field :message_profile_id,                   seq: 21, type: {EI, :id}, len: 20
+    field :message_profile_namespace_id,         seq: 21, type: {EI, :namespace_id}, len: 20
+    field :message_profile_universal_id,         seq: 21, type: {EI, :universal_id}, len: 20
+    field :message_profile_universal_type,       seq: 21, type: {EI, :universal_id_type}, len: 20
   end
 end
