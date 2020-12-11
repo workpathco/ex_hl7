@@ -12,7 +12,7 @@ defmodule HL7.Segment.Default.OBR do
     field :place_order_id,                      seq:  2, type: {EI, :id}, len: 20
     field :place_order_namespace_id,            seq:  2, type: {EI, :namespace_id}, len: 20
     field :place_order_universal_id,            seq:  2, type: {EI, :universal_id}, len: 20
-    field :place_order_universal_type,          seq:  2, type: {EI, :universal_id_type}, len: 20
+    field :place_order_universal_id_type,       seq:  2, type: {EI, :universal_id_type}, len: 20
     field :universal_service_id,                seq:  4, type: {CE, :id}, len: 20
     field :universal_service_name,              seq:  4, type: {CE, :text}, len: 30
     field :universal_service_alt_id,            seq:  4, type: {CE, :alt_id}, len: 20

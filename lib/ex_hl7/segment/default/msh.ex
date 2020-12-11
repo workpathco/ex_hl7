@@ -37,6 +37,6 @@ defmodule HL7.Segment.Default.MSH do
     field :message_profile_id,                   seq: 21, type: {EI, :id}, len: 20
     field :message_profile_namespace_id,         seq: 21, type: {EI, :namespace_id}, len: 20
     field :message_profile_universal_id,         seq: 21, type: {EI, :universal_id}, len: 20
-    field :message_profile_universal_type,       seq: 21, type: {EI, :universal_id_type}, len: 20
+    field :message_profile_universal_id_type,    seq: 21, type: {EI, :universal_id_type}, len: 20
   end
 end

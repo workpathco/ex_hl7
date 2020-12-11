@@ -10,7 +10,7 @@ defmodule HL7.Segment.Default.ORC do
     field :place_order_id,                seq:  2, type: {EI, :id}, len: 20
     field :place_order_namespace_id,      seq:  2, type: {EI, :namespace_id}, len: 20
     field :place_order_universal_id,      seq:  2, type: {EI, :universal_id}, len: 20
-    field :place_order_universal_type,    seq:  2, type: {EI, :universal_id_type}, len: 20
+    field :place_order_universal_id_type, seq:  2, type: {EI, :universal_id_type}, len: 20
     field :verifier_id,                   seq: 11, rep: 1, type: {XCN, :id_number}, len: 20
     field :verifier_last_name,            seq: 11, rep: 1, type: {XCN, :family_name}, len: 25
     field :verifier_first_name,           seq: 11, rep: 1, type: {XCN, :given_name}, len: 25
