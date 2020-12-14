@@ -35,17 +35,17 @@ defmodule HL7.Segment.Default.IN1 do
     field :company_name_representation_code,                               seq:  4, rep: 1, type: {XON, :name_representation_code}, len: 1
     field :company_name_organization_identifier,                           seq:  4, rep: 1, type: {XON, :organization_identifier}, len: 20
 
-    field :street,                                                         seq:  5, rep: 1, type: {XAD, :street_address, :street_or_mailing_address}, len: 120
-    field :street_name,                                                    seq:  5, rep: 1, type: {XAD, :street_address, :street_name}, len: 50
-    field :dwelling_number,                                                seq:  5, rep: 1, type: {XAD, :street_address, :dwelling_number}, len: 12
-    field :other_designation,                                              seq:  5, rep: 1, type: {XAD, :other_designation}, len: 120
-    field :city,                                                           seq:  5, rep: 1, type: {XAD, :city}, len: 50
-    field :state,                                                          seq:  5, rep: 1, type: {XAD, :state}, len: 50
-    field :postal_code,                                                    seq:  5, rep: 1, type: {XAD, :postal_code}, len: 12
-    field :country,                                                        seq:  5, rep: 1, type: {XAD, :country}, len: 3
-    field :address_type,                                                   seq:  5, rep: 1, type: {XAD, :address_type}, len: 3
-    field :effective_date,                                                 seq:  5, rep: 1, type: {XAD, :effective_date}, len: 26
-    field :expiration_date,                                                seq:  5, rep: 1, type: {XAD, :expiration_date}, len: 26
+    field :company_street,                                                 seq:  5, rep: 1, type: {XAD, :street_address, :street_or_mailing_address}, len: 120
+    field :company_street_name,                                            seq:  5, rep: 1, type: {XAD, :street_address, :street_name}, len: 50
+    field :company_dwelling_number,                                        seq:  5, rep: 1, type: {XAD, :street_address, :dwelling_number}, len: 12
+    field :company_other_designation,                                      seq:  5, rep: 1, type: {XAD, :other_designation}, len: 120
+    field :company_city,                                                   seq:  5, rep: 1, type: {XAD, :city}, len: 50
+    field :company_state,                                                  seq:  5, rep: 1, type: {XAD, :state}, len: 50
+    field :company_postal_code,                                            seq:  5, rep: 1, type: {XAD, :postal_code}, len: 12
+    field :company_country,                                                seq:  5, rep: 1, type: {XAD, :country}, len: 3
+    field :company_address_type,                                           seq:  5, rep: 1, type: {XAD, :address_type}, len: 3
+    field :company_effective_date,                                         seq:  5, rep: 1, type: {XAD, :effective_date}, len: 26
+    field :company_expiration_date,                                        seq:  5, rep: 1, type: {XAD, :expiration_date}, len: 26
 
     field :formatted_phone_number,                                         seq:  7, rep: 1, type: {XTN, :formatted_phone_number}, len: 199
     field :telecom_use_code,                                               seq:  7, rep: 1, type: {XTN, :telecom_use_code}, len: 3
@@ -60,19 +60,19 @@ defmodule HL7.Segment.Default.IN1 do
     field :group_number,                                                   seq:  8, type: :string, len: 12
 
     field :insureds_group_emp_name,                                        seq: 11, rep: 1, type: {XON, :organization_name}, len: 50
-    field :insureds_group_emp_name_type_code,                              seq: 11, rep: 1, type: {XON, :organization_name_type_code}, len: 20
-    field :insureds_group_emp_name_id_number,                              seq: 11, rep: 1, type: {XON, :id_number}, len: 4
-    field :insureds_group_emp_name_check_digit,                            seq: 11, rep: 1, type: {XON, :check_digit}, len: 1
-    field :insureds_group_emp_name_check_digit_scheme,                     seq: 11, rep: 1, type: {XON, :check_digit_scheme}, len: 3
-    field :insureds_group_emp_name_assigning_authority_id,                 seq: 11, rep: 1, type: {XON, :assigning_authority, :namespace_id}, len: 20
-    field :insureds_group_emp_name_assigning_authority_universal_id,       seq: 11, rep: 1, type: {XON, :assigning_authority, :universal_id}, len: 199
-    field :insureds_group_emp_name_assigning_authority_universal_id_type,  seq: 11, rep: 1, type: {XON, :assigning_authority, :universal_id_type}, len: 6
-    field :insureds_group_emp_name_id_type,                                seq: 11, rep: 1, type: {XON, :id_type}, len: 5
-    field :insureds_group_emp_name_assigning_facility_id,                  seq: 11, rep: 1, type: {XON, :assigning_facility, :namespace_id}, len: 20
-    field :insureds_group_emp_name_assigning_facility_universal_id,        seq: 11, rep: 1, type: {XON, :assigning_facility, :universal_id}, len: 199
-    field :insureds_group_emp_name_assigning_facility_universal_id_type,   seq: 11, rep: 1, type: {XON, :assigning_facility, :universal_id_type}, len: 6
-    field :insureds_group_emp_name_representation_code,                    seq: 11, rep: 1, type: {XON, :name_representation_code}, len: 1
-    field :insureds_group_emp_name_organization_identifier,                seq: 11, rep: 1, type: {XON, :organization_identifier}, len: 20
+    field :insureds_group_emp_type_code,                                   seq: 11, rep: 1, type: {XON, :organization_name_type_code}, len: 20
+    field :insureds_group_emp_id_number,                                   seq: 11, rep: 1, type: {XON, :id_number}, len: 4
+    field :insureds_group_emp_check_digit,                                 seq: 11, rep: 1, type: {XON, :check_digit}, len: 1
+    field :insureds_group_emp_check_digit_scheme,                          seq: 11, rep: 1, type: {XON, :check_digit_scheme}, len: 3
+    field :insureds_group_emp_assigning_authority_id,                      seq: 11, rep: 1, type: {XON, :assigning_authority, :namespace_id}, len: 20
+    field :insureds_group_emp_assigning_authority_universal_id,            seq: 11, rep: 1, type: {XON, :assigning_authority, :universal_id}, len: 199
+    field :insureds_group_emp_assigning_authority_universal_id_type,       seq: 11, rep: 1, type: {XON, :assigning_authority, :universal_id_type}, len: 6
+    field :insureds_group_emp_id_type,                                     seq: 11, rep: 1, type: {XON, :id_type}, len: 5
+    field :insureds_group_emp_assigning_facility_id,                       seq: 11, rep: 1, type: {XON, :assigning_facility, :namespace_id}, len: 20
+    field :insureds_group_emp_assigning_facility_universal_id,             seq: 11, rep: 1, type: {XON, :assigning_facility, :universal_id}, len: 199
+    field :insureds_group_emp_assigning_facility_universal_id_type,        seq: 11, rep: 1, type: {XON, :assigning_facility, :universal_id_type}, len: 6
+    field :insureds_group_emp_representation_code,                         seq: 11, rep: 1, type: {XON, :name_representation_code}, len: 1
+    field :insureds_group_emp_organization_identifier,                     seq: 11, rep: 1, type: {XON, :organization_identifier}, len: 20
 
     field :authorization_number,                                           seq: 14, type: {CM_IN1_14, :number}, len: 20
     field :authorization_date,                                             seq: 14, type: {CM_IN1_14, :date}, len: 8
