@@ -88,6 +88,6 @@ defmodule HL7.Segment.Default.OBX do
     field :performing_organization_director_prefix,                         seq: 25, rep: 1, type: {XCN, :prefix}, len: 25
     field :performing_organization_director_id_type,                        seq: 25, rep: 1, type: {XCN, :id_type}, len: 25
     field :performing_organization_director_assigning_facility,             seq: 25, rep: 1, type: {XCN, :assigning_facility}, len: 25
-    field :performing_organization_director_professional_suffix,            seq: 16, rep: 1, type: {XCN, :professional_suffix}, len: 25
+    field :performing_organization_director_professional_suffix,            seq: 25, rep: 1, type: {XCN, :professional_suffix}, len: 25
   end
 end
