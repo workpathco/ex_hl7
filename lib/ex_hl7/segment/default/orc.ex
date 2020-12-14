@@ -79,6 +79,6 @@ defmodule HL7.Segment.Default.ORC do
     field :parent_service_alt_coding_system,                    seq: 31,  rep: 1, type: {CWE, :alt_coding_system}, len: 12
     field :parent_service_coding_system_version,                seq: 31,  rep: 1, type: {CWE, :coding_system_version}, len: 14
     field :parent_service_alt_coding_system_version,            seq: 31,  rep: 1, type: {CWE, :alt_coding_system_version}, len: 14
-    field :parent_service_original_text,                        seq: 31,  rep: 1, type: {CWE, :original_text}, len: 14
+    field :parent_service_original_text,                        seq: 31,  rep: 1, type: {CWE, :original_text}, len: 199
   end
 end

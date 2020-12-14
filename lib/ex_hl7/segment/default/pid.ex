@@ -37,7 +37,7 @@ defmodule HL7.Segment.Default.PID do
     field :race_alt_coding_system,                          seq: 10,  rep: 1, type: {CWE, :alt_coding_system}, len: 12
     field :race_coding_system_version,                      seq: 10,  rep: 1, type: {CWE, :coding_system_version}, len: 14
     field :race_alt_coding_system_version,                  seq: 10,  rep: 1, type: {CWE, :alt_coding_system_version}, len: 14
-    field :race_original_text,                              seq: 10,  rep: 1, type: {CWE, :original_text}, len: 14
+    field :race_original_text,                              seq: 10,  rep: 1, type: {CWE, :original_text}, len: 199
     field :street,                                          seq: 11,  rep: 1, type: {XAD, :street_address, :street_or_mailing_address}, len: 20
     field :street_name,                                     seq: 11,  rep: 1, type: {XAD, :street_address, :street_name}, len: 20
     field :dwelling_number,                                 seq: 11,  rep: 1, type: {XAD, :street_address, :dwelling_number}, len: 20

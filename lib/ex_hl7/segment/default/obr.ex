@@ -30,7 +30,7 @@ defmodule HL7.Segment.Default.OBR do
     field :universal_service_alt_coding_system,                   seq:  4,  rep: 1, type: {CWE, :alt_coding_system}, len: 12
     field :universal_service_coding_system_version,               seq:  4,  rep: 1, type: {CWE, :coding_system_version}, len: 14
     field :universal_service_alt_coding_system_version,           seq:  4,  rep: 1, type: {CWE, :alt_coding_system_version}, len: 14
-    field :universal_service_original_text,                       seq:  4,  rep: 1, type: {CWE, :original_text}, len: 14
+    field :universal_service_original_text,                       seq:  4,  rep: 1, type: {CWE, :original_text}, len: 199
 
     field :observation_datetime,                                  seq:  7, type: :datetime, len: 26
 
@@ -107,6 +107,6 @@ defmodule HL7.Segment.Default.OBR do
     field :parent_universal_service_alt_coding_system,            seq: 50,  rep: 1, type: {CWE, :alt_coding_system}, len: 12
     field :parent_universal_service_coding_system_version,        seq: 50,  rep: 1, type: {CWE, :coding_system_version}, len: 14
     field :parent_universal_service_alt_coding_system_version,    seq: 50,  rep: 1, type: {CWE, :alt_coding_system_version}, len: 14
-    field :parent_universal_service_original_text,                seq: 50,  rep: 1, type: {CWE, :original_text}, len: 14
+    field :parent_universal_service_original_text,                seq: 50,  rep: 1, type: {CWE, :original_text}, len: 199
   end
 end
