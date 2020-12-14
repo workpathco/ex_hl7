@@ -27,6 +27,7 @@ defmodule HL7.Composite.Spec do
     caller_module = __CALLER__.module
 
     quote do
+      Module.register_attribute(unquote(caller_module), :struct_fields, accumulate: true)
       Module.register_attribute(unquote(caller_module), :components, accumulate: true)
       @before_compile unquote(__MODULE__)
 
@@ -65,6 +66,7 @@ defmodule HL7.Composite.Spec do
       # Accumulate the components and fields of the struct that will be added to the module so
       # that the corresponding functions can be generated in the __before_compile__ function.
       @components {name, type}
+      @struct_fields {name, default}
     end
   end
 
@@ -76,7 +78,14 @@ defmodule HL7.Composite.Spec do
       |> Module.get_attribute(:components)
       |> Enum.reverse()
 
+    struct_fields =
+      composite_mod
+      |> Module.get_attribute(:struct_fields)
+      |> Enum.reverse()
+
     quote do
+      defstruct unquote(Macro.escape(struct_fields))
+
       @doc "Return the specification for the composite type."
       @spec spec() :: [HL7.Composite.spec()]
       def spec(), do: unquote(Macro.escape(spec))
