@@ -175,7 +175,7 @@ defmodule HL7.Composite.Spec do
         {^key, type} when tuple_size(composite_type) === 2 ->
           type
 
-        {^key, subcomposite_mod} when tuple_size(composite_type) > 2 ->
+        {^key, subcomposite_mod} when tuple_size(composite_type) in [2, 3] ->
           # replace first field with the module
           composite_fields
           |> Tuple.delete_at(0)

@@ -61,9 +61,8 @@ defmodule HL7.Segment.Default.OBR do
     field :parent_result_observation_alt_coding_system,           seq: 26, type: {PRL, :observation_identifier, :alt_coding_system}, len: 20
     field :parent_result_observation_sub_id,                      seq: 26, type: {PRL, :observation_sub_identifier}, len: 20
 
-    field :quantity,                                              seq: 27, rep: 1, type: {TQ, :quantity, :quantity}, len: 16
-    field :units_id,                                              seq: 27, rep: 1, type: {TQ, :quantity, :units, :id}, len: 20
-    field :units_text,                                            seq: 27, rep: 1, type: {TQ, :quantity, :units, :text}, len: 199
+    # OBR.27 is deprecated in 2.5.1+, use TQ1 segment instead
+    field :quantity,                                              seq: 27, rep: 1, type: {TQ, :quantity}, len: 199
     field :repeat_pattern,                                        seq: 27, rep: 1, type: {TQ, :interval, :repeat_pattern}, len: 8
     field :explicit_interval,                                     seq: 27, rep: 1, type: {TQ, :interval, :explicit_interval}, len: 8
     field :duration,                                              seq: 27, rep: 1, type: {TQ, :duration}, len: 8

@@ -2,9 +2,12 @@ defmodule HL7.Composite.Default.TQ do
   @moduledoc """
   4.3 Quantity/Timing (TQ) data type definition
 
+  `quantity` is string because CQ cannot be legally expressed  when
+  embedded within another data type due to having a nested CE type
+
   Components:
 
-    - `quantity` (CQ)
+    - `quantity` (ST)
     - `interval` (CM)
     - `duration` (ST)
     - `start_datetime` (TS)
@@ -23,10 +26,9 @@ defmodule HL7.Composite.Default.TQ do
   require HL7.Composite.Default.CE, as: CE
   require HL7.Composite.Default.CM_TQ_2, as: CM_TQ_2
   require HL7.Composite.Default.CM_TQ_10, as: CM_TQ_10
-  require HL7.Composite.Default.CQ, as: CQ
 
   composite do
-    component :quantity,          type: CQ
+    component :quantity,          type: :string
     component :interval,          type: CM_TQ_2
     component :duration,          type: :string
     component :start_datetime,    type: :datetime
