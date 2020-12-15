@@ -102,6 +102,70 @@ defmodule HL7.Test.MessageTest do
     assert trim === IO.iodata_to_binary(gen)
   end
 
+  test "handle read/write of unknown segments" do
+    orig =
+      """
+      MSH|^~\\&|CLIENTHL7|CLI01020304^|SERVHL7|PREPAGA^112233^IIN|20120201101155||ZQA^Z02^ZQA_Z02|00XX20120201101155|P|2.4|||ER|SU|ARG
+      PRD|PS^^~4600^^HL70454||^^^B^||||30123456789^CU^
+      PID|0||1234567890ABC^^^&112233&IIN^HC||unknown^
+      PR1|1||903401^^99DH
+      AUT||112233^||||||1|0
+      PR1|2||904620^^99DH
+      AUT||112233^||||||1|0
+      NK1|1|DOE^MARY|MTH^MOTHER^HL70063|
+      """
+    trim =
+      """
+      MSH|^~\\&|CLIENTHL7|CLI01020304|SERVHL7|PREPAGA^112233^IIN|20120201101155||ZQA^Z02^ZQA_Z02|00XX20120201101155|P|2.4|||ER|SU|ARG
+      PRD|PS~4600^^HL70454||^^^B||||30123456789^CU
+      PID|0||1234567890ABC^^^&112233&IIN^HC||unknown
+      PR1|1||903401^^99DH
+      AUT||112233||||||1|0
+      PR1|2||904620^^99DH
+      AUT||112233||||||1|0
+      NK1|1|DOE^MARY|MTH^MOTHER^HL70063
+      """
+
+    {:ok, msg} = HL7.read(orig, input_format: :text, trim: true, allow_unknown: true)
+    gen = HL7.write(msg, output_format: :text, trim: true, allow_unknown: true)
+    assert trim === IO.iodata_to_binary(gen)
+  end
+
+  test "can insert segments with unknown segments in message" do
+    expected =
+      "MSH|^~\\&|||||||||||||||ARG\r" <>
+      "NK1|1|DOE^MARY|MTH^MOTHER^HL70063\r" <>
+      "AUT||112233||||||1|0\r"
+
+    msh = %HL7.Segment.Default.MSH{
+      field_separator: "|",
+      encoding_chars: "^~\\&"
+    }
+
+    aut = %HL7.Segment.Default.AUT{
+      __segment__: "AUT",
+      authorized_treatments: 0,
+      company_id: "112233",
+      requested_treatments: 1
+    }
+
+    unknown_segment = %{
+      0 => "1",
+      1 => {"DOE", "MARY"},
+      2 => {"MTH", "MOTHER", "HL70063"},
+      3 => "",
+      :__segment__ => "NK1",
+      :unknown => true
+    }
+
+    message = [msh]
+    |> HL7.insert_after("MSH", unknown_segment)
+    |> HL7.insert_after("NK1", aut)
+
+    gen = HL7.write(message, output_format: :wire, trim: true, allow_unknown: true)
+    assert expected === IO.iodata_to_binary(gen)
+  end
+
   # test "Read trimmed request in wire format and write it untrimmed in stdio format" do
   #   trim =
   #     "MSH|^~\\&|CLIENTHL7|CLI01020304|SERVHL7|PREPAGA^112233^IIN|20120201101155||ZQA^Z02^ZQA_Z02|00XX20120201101155|P|2.4|||ER|SU|ARG\r" <>

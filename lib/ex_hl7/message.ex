@@ -629,9 +629,10 @@ defmodule HL7.Message do
     end
   end
 
-  defp read_field(_, %{unknown: :true} = segment, _, field) do
+  defp read_field(_, %{unknown: true} = segment, _, field) do
     id = segment |> Enum.to_list |> length
-    segment |> Map.put("field_#{id}", field)
+    # adjusted by tw0 due to segment having two internal keys (:__segment__, :unknown)
+    segment |> Map.put(id - 2, field)
   end
 
   defp read_field(reader, segment, segment_spec, field) do
@@ -696,28 +697,31 @@ defmodule HL7.Message do
     writer
   end
 
-  defp write_segment(writer, segment, segment_id) do
+  defp write_segment(%Writer{allow_unknown: allow_unknown} = writer, segment, segment_id) do
     case Writer.builder(writer).segment_spec(segment_id) do
-      {:ok, segment_spec} ->
-        {writer, _last_seq} =
-          Enum.reduce(segment_spec, {writer, 1}, fn {seq, field_spec}, {writer1, prev_seq} ->
-            # Get the intermediate representation corresponding to the field.
-            field = Segment.get_field_ir!(segment, field_spec)
-            # If there are empty fields between the previous sequence and the current
-            # one, write them before writing the field.
-            writer1 =
-              writer1
-              |> write_empty_fields(prev_seq, seq - 1)
-              |> Writer.put_field(field)
-
-            {writer1, seq}
-          end)
-
-        writer
-
-      :error ->
-        raise ArgumentError, "invalid segment ID: #{inspect(segment_id)}"
+      {:ok, segment_spec} -> reduce_segment(writer, segment, segment_spec)
+      :error when allow_unknown == true -> reduce_segment(writer, segment, nil, true)
+      :error -> raise ArgumentError, "invalid segment ID: #{inspect(segment_id)}"
     end
+  end
+
+  defp reduce_segment(writer, segment, segment_spec, unknown \\ false) do
+    segment_spec = if unknown == true, do: build_spec_from_map(segment), else: segment_spec
+    {writer, _last_seq} =
+      Enum.reduce(segment_spec, {writer, 1}, fn {seq, field_spec}, {writer1, prev_seq} ->
+        # Get the intermediate representation corresponding to the field.
+        field = Segment.get_field_ir!(segment, field_spec)
+        # If there are empty fields between the previous sequence and the current
+        # one, write them before writing the field.
+        writer1 =
+          writer1
+          |> write_empty_fields(prev_seq, seq - 1)
+          |> Writer.put_field(field)
+
+        {writer1, seq}
+      end)
+
+    writer
   end
 
   defp write_empty_fields(writer, prev_seq, seq) do
@@ -728,5 +732,12 @@ defmodule HL7.Message do
     else
       writer
     end
+  end
+
+  defp build_spec_from_map(%{__segment__: _, unknown: true} = segment) do
+    # remove non data keys
+    Map.drop(segment, [:__segment__, :unknown])
+    |> Enum.map(fn {name, _} -> {name, [{name, {1}, :string, 9999}]} end)
+    |> Enum.into(Map.new())
   end
 end

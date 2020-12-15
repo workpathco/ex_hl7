@@ -7,6 +7,7 @@ defmodule HL7.Writer do
             trim: true,
             output_format: :wire,
             buffer: [],
+            allow_unknown: false,
             segment_builder: nil
 
   alias HL7.{Codec, Segment, Type, Writer}
@@ -35,6 +36,7 @@ defmodule HL7.Writer do
       trim: Keyword.get(options, :trim, true),
       output_format: Keyword.get(options, :output_format, :wire),
       buffer: [],
+      allow_unknown: Keyword.get(options, :allow_unknown, false),
       segment_builder: Keyword.get(options, :segment_builder, Segment.Default.Builder)
     }
   end

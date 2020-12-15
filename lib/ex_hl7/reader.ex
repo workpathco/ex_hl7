@@ -44,7 +44,7 @@ defmodule HL7.Reader do
             sequence: 0,
             item_type: :segment,
             trim: true,
-            allow_unknown: :false,
+            allow_unknown: false,
             segment_builder: nil
 
   @type option ::
@@ -92,7 +92,7 @@ defmodule HL7.Reader do
   def create_segment(%Reader{segment_builder: segment_builder, allow_unknown: allow_unknown}, segment_id) do
     case segment_builder.new(segment_id) do
       result = {:ok, {_segment, _segment_spec}} -> result
-      :error when allow_unknown == :true -> {:ok, {%{__segment__: segment_id, unknown: :true}, %{}}}
+      :error when allow_unknown == true -> {:ok, {%{__segment__: segment_id, unknown: true}, %{}}}
       :error -> {:error, {:unknown_segment_id, [segment_id: segment_id]}}
     end
   end
