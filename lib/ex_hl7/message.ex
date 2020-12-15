@@ -629,6 +629,11 @@ defmodule HL7.Message do
     end
   end
 
+  defp read_field(_, %{unknown: :true} = segment, _, field) do
+    id = segment |> Enum.to_list |> length
+    segment |> Map.put("field_#{id}", field)
+  end
+
   defp read_field(reader, segment, segment_spec, field) do
     seq = Reader.sequence(reader)
 
