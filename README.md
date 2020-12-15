@@ -1,5 +1,18 @@
 # HL7 Parser for Elixir
-
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [Encoding Rules](#encoding-rules)
+- [Single Value Fields](#single-value-fields)
+- [Composite Fields](#composite-fields)
+- [Segments](#segments)
+- [Messages](#messages)
+- [Example](#example)
+- [Read Undefined Segments](#read-undefined-segments)
+  - [Example](#example-1)
+- [Write Undefined Segments](#write-undefined-segments)
+  - [Example](#example-2)
 ## Overview
 
 Health Level 7 ([HL7](http://www.hl7.org/)) is a protocol (and an organization) designed to model
@@ -404,4 +417,78 @@ req |> Enum.filter(&(HL7.segment_id(&1) === "PRD")) |> providers() |> IO.puts()
 
 # Create an authorized response and print it
 req |> authorize() |> HL7.write(output_format: :text, trim: true) |> IO.puts()
+```
+
+
+## Read Undefined Segments
+Undefined segments can be parsed by using `allow_unknown: true`.  Undefined segments will
+be put into a map. ([example](#read-unknown-segments))
+
+```elixir
+{:ok, message} = HL7.read(buffer, allow_unknown: true)
+```
+
+### Example
+```elixir
+buffer =
+  "MSH|^~\\&|||||||||||||||ARG\r" <>
+  "NK1|1|DOE^MARY|MTH^MOTHER^HL70063|\r" <> # undefined segment
+  "AUT||112233||||||1|0\r"
+
+{:ok, message} = HL7.read(buffer, input_format: :wire, allow_unknown: true)
+```
+in this case the NK1 segment would be:
+
+```elixir
+%{
+  0 => "1",
+  1 => {"DOE", "MARY"},
+  2 => {"MTH", "MOTHER", "HL70063"},
+  3 => "",
+  :__segment__ => "NK1",
+  :unknown => true
+}
+
+```
+
+## Write Undefined Segments
+Undefined segments can be written by using `allow_unknown: true`.  Undefined segments must
+be a map with keys `:__segment__` as the segment type id and `unknown: true` and all data keys as numbers. ([example](#write-unknown-segments))
+
+```elixir
+HL7.write(message, output_format: :wire, trim: true, allow_unknown: true)
+```
+
+### Example
+```elixir
+undefined_segment = %{
+    0 => "1",
+    1 => "DOE^MARY",
+    2 => "MTH^MOTHER^HL70063",
+    3 => "",
+    :__segment__ => "NK1", # undefined segment type id
+    :unknown => true # required
+  }
+
+aut = %AUT{
+  authorized_treatments: 0,
+  company_id: "112233",
+  requested_treatments: 1
+}
+
+message = [%MSH{
+  field_separator: "|",
+  encoding_chars: "^~\\&"
+}]
+|> HL7.insert_after("MSH", undefined_segment)
+|> HL7.insert_after("NK1", aut)
+
+HL7.write(message, output_format: :wire, trim: true, allow_unknown: true)
+```
+
+in this case the message would be
+```elixir
+"MSH|^~\\&|||||||||||||||ARG\r" <>
+"NK1|1|DOE^MARY|MTH^MOTHER^HL70063|\r" <> # undefined segment
+"AUT||112233||||||1|0\r"
 ```
