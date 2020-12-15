@@ -30,15 +30,27 @@ defmodule HL7.Composite do
       {{1, 2}, :string}
 
   """
-  def spec!(composite) when is_tuple(composite) do
-    root = elem(composite, 0)
-    Tuple.delete_at(composite, 0)
-    |> Tuple.to_list()
-    |> Enum.reduce({{}, root}, fn key, {indexes, type} when is_atom(type) ->
-        {index, type} = item_spec!(type, key)
-        indexes = Tuple.append(indexes, index)
-        {indexes, type}
-    end)
+  def spec!({component_mod, component_key})
+      when is_atom(component_mod) and is_atom(component_key) do
+    {component_index, type} =
+      component_mod
+      |> item_spec!(component_key)
+
+    {{component_index}, type}
+  end
+
+  def spec!({component_mod, component_key, subcomponent_key})
+      when is_atom(component_mod) and is_atom(component_key) and
+             is_atom(subcomponent_key) do
+    {component_index, subcomponent_mod} =
+      component_mod
+      |> item_spec!(component_key)
+
+    {subcomponent_index, type} =
+      subcomponent_mod
+      |> item_spec!(subcomponent_key)
+
+    {{component_index, subcomponent_index}, type}
   end
 
   defp item_spec!(composite_mod, item_key) do

@@ -166,7 +166,6 @@ defmodule HL7.Composite.Spec do
   """
   def base_type(composite_type) when is_tuple(composite_type) do
     composite_mod = elem(composite_type, 0)
-    composite_fields = Tuple.delete_at(composite_type, 0)
 
     if composite_module?(composite_mod) do
       key = elem(composite_type, 1)
@@ -175,12 +174,8 @@ defmodule HL7.Composite.Spec do
         {^key, type} when tuple_size(composite_type) === 2 ->
           type
 
-        {^key, subcomposite_mod} when tuple_size(composite_type) in [2, 3] ->
-          # replace first field with the module
-          composite_fields
-          |> Tuple.delete_at(0)
-          |> Tuple.insert_at(0, subcomposite_mod)
-          |> base_type()
+        {^key, subcomposite_mod} when tuple_size(composite_type) === 3 ->
+          base_type({subcomposite_mod, elem(composite_type, 2)})
 
         nil ->
           nil
