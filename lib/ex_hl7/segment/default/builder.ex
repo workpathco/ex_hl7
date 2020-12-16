@@ -8,11 +8,14 @@ defmodule HL7.Segment.Default.Builder do
   require HL7.Segment.Default.DSP, as: DSP
   require HL7.Segment.Default.ERR, as: ERR
   require HL7.Segment.Default.EVN, as: EVN
+  require HL7.Segment.Default.GT1, as: GT1
   require HL7.Segment.Default.IN1, as: IN1
   require HL7.Segment.Default.MSA, as: MSA
   require HL7.Segment.Default.MSH, as: MSH
   require HL7.Segment.Default.NTE, as: NTE
+  require HL7.Segment.Default.OBR, as: OBR
   require HL7.Segment.Default.OBX, as: OBX
+  require HL7.Segment.Default.ORC, as: ORC
   require HL7.Segment.Default.PID, as: PID
   require HL7.Segment.Default.PR1, as: PR1
   require HL7.Segment.Default.PRD, as: PRD
@@ -22,6 +25,8 @@ defmodule HL7.Segment.Default.Builder do
   require HL7.Segment.Default.QPD, as: QPD
   require HL7.Segment.Default.RCP, as: RCP
   require HL7.Segment.Default.RF1, as: RF1
+  require HL7.Segment.Default.SPM, as: SPM
+  require HL7.Segment.Default.TQ1, as: TQ1
   require HL7.Segment.Default.ZAU, as: ZAU
   require HL7.Segment.Default.ZIN, as: ZIN
 
@@ -34,11 +39,14 @@ defmodule HL7.Segment.Default.Builder do
     DSP.id() => DSP,
     ERR.id() => ERR,
     EVN.id() => EVN,
+    GT1.id() => GT1,
     IN1.id() => IN1,
     MSA.id() => MSA,
     MSH.id() => MSH,
     NTE.id() => NTE,
+    OBR.id() => OBR,
     OBX.id() => OBX,
+    ORC.id() => ORC,
     PID.id() => PID,
     PR1.id() => PR1,
     PRD.id() => PRD,
@@ -48,6 +56,8 @@ defmodule HL7.Segment.Default.Builder do
     QPD.id() => QPD,
     RCP.id() => RCP,
     RF1.id() => RF1,
+    SPM.id() => SPM,
+    TQ1.id() => TQ1,
     ZAU.id() => ZAU,
     ZIN.id() => ZIN
   }

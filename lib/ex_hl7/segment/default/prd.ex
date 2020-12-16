@@ -16,7 +16,9 @@ defmodule HL7.Segment.Default.PRD do
     field :specialty_coding_system,   seq:  1, rep: 2, type: {CE, :coding_system}, len: 7
     field :last_name,                 seq:  2, type: {XPN, :family_name, :surname}, len: 40
     field :first_name,                seq:  2, type: {XPN, :given_name}, len: 30
-    field :street,                    seq:  3, type: {XAD, :street_address}, len: 20
+    field :street,                    seq:  3, type: {XAD, :street_address, :street_or_mailing_address}, len: 20
+    field :street_name,               seq:  3, type: {XAD, :street_address, :street_name}, len: 20
+    field :dwelling_number,           seq:  3, type: {XAD, :street_address, :dwelling_number}, len: 20
     field :other_designation,         seq:  3, type: {XAD, :other_designation}, len: 20
     field :city,                      seq:  3, type: {XAD, :city}, len: 30
     field :state,                     seq:  3, type: {XAD, :state}, len: 1

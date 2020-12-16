@@ -13,19 +13,25 @@ defmodule HL7.Composite.Default.XTN do
     - `phone_number` (NM)
     - `extension` (NM)
     - `any_text` (ST)
+    - `extension_prefix` (ST)
+    - `speed_dial_code` (ST)
+    - `unformatted_phone_number` (ST)
 
   """
   use HL7.Composite.Spec
 
   composite do
-    component :formatted_phone_number, type: :string
-    component :telecom_use_code,       type: :string
-    component :telecom_equipment_type, type: :string
-    component :email,                  type: :string
-    component :country_code,           type: :integer
-    component :area_code,              type: :integer
-    component :phone_number,           type: :integer
-    component :extension,              type: :integer
-    component :any_text,               type: :string
+    component :formatted_phone_number,    type: :string
+    component :telecom_use_code,          type: :string
+    component :telecom_equipment_type,    type: :string
+    component :email,                     type: :string
+    component :country_code,              type: :integer
+    component :area_code,                 type: :integer
+    component :phone_number,              type: :integer
+    component :extension,                 type: :integer
+    component :any_text,                  type: :string
+    component :extension_prefix,          type: :string
+    component :speed_dial_code,           type: :string
+    component :unformatted_phone_number,  type: :string
   end
 end

@@ -94,5 +94,8 @@ defmodule HL7.Composite.Default.XCN do
     component :name_context,             type: CE
     component :name_validity,            type: DR
     component :name_assembly_order,      type: :string
+    component :effective_date,           type: :datetime
+    component :expiration_date,          type: :datetime
+    component :professional_suffix,      type: :string
   end
 end

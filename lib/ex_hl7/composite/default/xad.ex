@@ -16,6 +16,8 @@ defmodule HL7.Composite.Default.XAD do
     - `census_tract` (IS)
     - `address_representation` (ID)
     - `address_validity` (DR)
+    - `effective_date` (TS)
+    - `expiration_date` (TS)
 
   Subcomponents of street address (SAD):
 
@@ -53,9 +55,10 @@ defmodule HL7.Composite.Default.XAD do
   use HL7.Composite.Spec
 
   require HL7.Composite.Default.DR, as: DR
+  require HL7.Composite.Default.SAD, as: SAD
 
   composite do
-    component :street_address,         type: :string
+    component :street_address,         type: SAD
     component :other_designation,      type: :string
     component :city,                   type: :string
     component :state,                  type: :string
@@ -67,5 +70,7 @@ defmodule HL7.Composite.Default.XAD do
     component :census_tract,           type: :string
     component :adrress_representation, type: :string
     component :address_validity,       type: DR
+    component :effective_date,         type: :datetime
+    component :expiration_date,        type: :datetime
   end
 end
