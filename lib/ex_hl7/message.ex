@@ -393,6 +393,30 @@ defmodule HL7.Message do
   end
 
   @doc """
+  Appends a segment or segments onto the end of a message
+
+  ## Arguments
+
+  * `message`: the `HL7.message` where the segment/s will be appended.
+
+  * `segment`: the segment or list of segments that will be appended
+
+  ## Return values
+
+  Return a new message with the appended segments.
+
+  ## Examples
+
+  iex> alias HL7.Segment.MSA
+  iex> ack = %MSA{ack_code: "AA", message_control_id: "1234"}
+  iex> HL7.Message.append(message, msa)
+
+  """
+  @spec append(t, Segment.t() | [Segment.t()]) :: t
+  def append(message, segments) when is_list(segments), do: Enum.concat(message, segments)
+  def append(message, segment), do: Enum.concat(message, [segment])
+
+  @doc """
   Replaces the first repetition of an existing segment in a message.
 
   ## Arguments

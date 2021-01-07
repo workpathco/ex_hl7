@@ -490,6 +490,29 @@ defmodule HL7 do
   defdelegate insert_after(message, segment_id, repetition, segment), to: Message
 
   @doc """
+  Appends a segment or segments onto the end of a message
+
+  ## Arguments
+
+  * `message`: the `HL7.message` where the segment/s will be appended.
+
+  * `segment`: the segment or list of segments that will be appended
+
+  ## Return values
+
+  Return a new message with the appended segments.
+
+  ## Examples
+
+  iex> alias HL7.Segment.MSA
+  iex> ack = %MSA{ack_code: "AA", message_control_id: "1234"}
+  iex> HL7.Message.append(message, msa)
+
+  """
+  @spec append(Message.t(), Segment.t() | [Segment.t()]) :: Message.t()
+  defdelegate append(message, segment), to: Message
+
+  @doc """
   Replaces the first repetition of an existing segment in a message.
 
   ## Arguments
